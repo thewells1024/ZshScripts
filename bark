@@ -1,0 +1,5 @@
+#!/bin/zsh
+if [ $# -le 1 ]; then
+	echo "useage: bark PROJECT ACTION"
+fi
+cat ~/.logs/$1/$2.log.txt
