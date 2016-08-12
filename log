@@ -1,0 +1,13 @@
+if [ ! -r ~/.logs/tmp ]; then
+	mkdir -p ~/.logs/tmp
+fi
+PROJECT='tmp'
+ACTION='`date +%d_%m%y-%H:%M:%S`'
+if [ $# -ge 1 ]; then
+	PROJECT=$1
+	mkdir ~/.logs/$PROJECT
+fi
+if [ $# -ge 2 ]; then 
+	ACTION=$2
+fi
+tee ~/.logs/$PROJECT/$ACTION.log.txt
