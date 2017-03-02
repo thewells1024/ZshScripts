@@ -1,0 +1,26 @@
+#!/bin/zsh
+
+if [ $# -le 1 ]; then
+    echo 'usage: $0 PROJECT [LANGUAGES...]'
+    exit 1
+fi
+
+if [ -r $1 ]; then
+    echo 'Project already exists'
+    exit -1
+fi
+
+git init $1
+cd $1
+GITIGNORE_PATH=$HOME/gitignores
+if [ -r $GITIGNORE_PATH/base.gitignore ]; then
+    cat "$GITIGNORE_PATH/base.gitignore" > .gitignore
+else
+    touch .gitignore
+fi
+
+if [ $# -ge 2 ]; then
+    for LANG in ${@:2}; do
+        cat $GITIGNORE_PATH/$LANG.gitignore >> .gitignore
+    done
+fi

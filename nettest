@@ -1,0 +1,13 @@
+#!/bin/zsh
+
+if ! `dig google.com 2> /dev/null`; then
+    (>& 2 echo -e '\e[91mCannot Resolve DNS!!!\e[39m')
+    exit -1
+fi
+
+if ! `ping -c 10 google.com 2> /dev/null`; then
+    (>& 2 echo -e '\e[91mCannot Ping!!!\e[39m')
+    exit -1
+fi
+
+echo 'Done'
